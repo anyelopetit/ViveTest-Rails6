@@ -1,0 +1,52 @@
+.container.mt-5
+  = link_to 'Products', root_path, class: 'd-block text-right'
+  %h1.text-center Dashboard
+  .container-fluid.d-flex.flex-wrap.justify-content-around
+    .card.info
+      .card-body
+        .card-title.info Requested products
+        .card-number= @total_products.size
+    .card.success
+      .card-body
+        .card-title Succeeded products
+        .card-number= @succeeded_products.size
+    .card.error
+      .card-body
+        .card-title Failed products
+        .card-number= @failed_products.size
+    .card
+      %canvas#productsChart{ height: "200" }
+  .container.mt-5
+    - if @loaders.blank?
+      %h3 No products loaded
+    - else
+      %table.table.table-responsive-sm
+        %thead
+          %tr
+            %th Requested products
+            %th Succeeded products
+            %th Failed products
+            %th Date
+        %tbody
+          - @loaders.each do |loader|
+            %tr
+              %td= loader.total_products.size
+              %td= loader.products.size
+              %td= loader.failed_products.size
+              %td= loader.created_at.strftime('%F %T')
+
+:javascript
+  var ctx = document.getElementById("productsChart").getContext('2d');
+  var myChart = new Chart(ctx, {
+    type: 'pie',
+    data: {
+      labels: ["Success products", "Failed products"],
+      datasets: [{
+        backgroundColor: [
+          "#28a745",
+          "#dc3545"
+        ],
+        data: [#{@succeeded_products.size}, #{@failed_products.size}]
+      }]
+    }
+  });

@@ -1,0 +1,20 @@
+.container.mt-5
+  = link_to '← Go Back', root_path, class: 'btn btn-link'
+  %h1= @product.name
+  %p= @product.description
+
+  %br
+
+  %h3 Variants
+  - if @product.variants.blank?
+    %p This product hasn't variants
+  - else
+    %table.table
+      %thead
+        %th Name
+        %th Price
+      %tbody
+        - @product.variants.each do |variant|
+          %tr
+            %td= variant.name
+            %td= variant.price

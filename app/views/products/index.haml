@@ -1,0 +1,13 @@
+
+.container.mt-5
+  = link_to 'Dashboard', dashboard_path, class: 'd-block text-right'
+  %h1.text-center Products
+  .container-fluid.d-flex.flex-wrap.justify-content-around
+    - if @products.blank?
+      %h3 No products loaded
+    - else
+      - @products.each do |product|
+        = link_to product_path(product) do
+          .card.product
+            .card-body.d-flex.align-items-center.justify-content-center
+              %h5.card-title.text-center= product.name&.titleize
