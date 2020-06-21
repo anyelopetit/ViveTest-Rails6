@@ -118,4 +118,11 @@ Rails.application.configure do
   # config.active_record.database_selector = { delay: 2.seconds }
   # config.active_record.database_resolver = ActiveRecord::Middleware::DatabaseSelector::Resolver
   # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
+
+  # Environment variables
+  ENV['HEROKU_REDIS_ONYX_URL']  = 'redis://h:p1ba50bff3f5837fce77305af750e8629b90d9a532657397f32a704a471db5f45@ec2-34-235-217-54.compute-1.amazonaws.com:14169'
+  ENV['REDISTOGO_URL']          = 'redis://redistogo:43b2cdd3a97c73da27ed50b978d88d62@pike.redistogo.com:11300/'
+  ENV['REDIS_URL']              = 'redis://h:p5c369ad565e26b27c191da28aae07652f3f4707953bd2fbe667dfb5ce051e2d3@ec2-54-167-234-190.compute-1.amazonaws.com:13229'
+  ENV['REDIS_DB']               = 0
+  ENV['REDIS_PORT']             = 6379
 end

@@ -31,23 +31,34 @@ gem 'active_model_serializers'
 - La plataforma permite la carga de productos a través de un endpoint de tipo `POST /products`.
 - Provee un dashboard que permite ver el estado de cargue de los productos que se han solicitado cargar a través del
 API, con los siguientes indicadores:
-  - # de productos solicitados para cargue.
-  - # de productos cargados.
-  - # de productos no cargado
+  - Cantidad de productos solicitados para cargue.
+  - Cantidad de productos cargados.
+  - Cantidad de productos no cargado
 - La home page lista los productos que están en base de datos permitiendo hacer clic a un enlace en donde se puede ver el detalle de las variantes.
 
 
 # Definiciones
 - Loader: maneja la carga de productos
-  - failed_products: JSON. Almacena un Array con todas las instancias de los productos fallidos.
-  - has_many :products
+  - Campos de base de datos:
+    - `failed_products`: JSON. Almacena un Array con todas las instancias de los productos fallidos.
+  - Relaciones con otros modelos:
+    - `has_many :products`
+  - Métodos personalizados:
+    - `total_products`: la suma de los productos creados más los productos fallidos de esta carga solicitada.
+    - `self.total_products`: la suma total de todos los productos creados más todos los productos fallidos de todas las cargas solicitadas.
+    - `self.failed_products`: todos los productos fallidos de todas las cargas solicitadas.
 - Product: cada producto guardado exitosamente.
-  - name: String. Nombre del producto.
-  - description: Text. Descripción del producto.
-  - belongs_to :loader
-  - has_many :variants
+  - Campos de base de datos:
+    - `name`: String. Nombre del producto.
+    - `description`: Text. Descripción del producto.
+  - Relaciones con otros modelos:
+    - `belongs_to :loader`
+    - `has_many :variants`
 - Variant: variante del producto.
-  - name: String. Nombre de la variante (ej. "Talla").
-  - price: Float. Precio de la variante (ej. 15.45).
+  - Campos de base de datos:
+    - `name`: String. Nombre de la variante (ej. "Talla").
+    - `price`: Float. Precio de la variante (ej. 15.45).
+  - Relaciones con otros modelos:
+    - `belongs_to :product`
 
 ![ERD](https://i.ibb.co/D5Wn3Jv/Deepin-Screenshot-Seleccionar-rea-20200620195050.png)
