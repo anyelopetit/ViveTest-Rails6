@@ -83,6 +83,7 @@ GEM
     case_transform (0.2)
       activesupport
     childprocess (3.0.0)
+    choice (0.2.0)
     concurrent-ruby (1.1.6)
     connection_pool (2.2.3)
     crass (1.0.6)
@@ -174,6 +175,11 @@ GEM
     rails-dom-testing (2.0.3)
       activesupport (>= 4.2.0)
       nokogiri (>= 1.6)
+    rails-erd (1.6.0)
+      activerecord (>= 4.2)
+      activesupport (>= 4.2)
+      choice (~> 0.2.0)
+      ruby-graphviz (~> 1.2)
     rails-html-sanitizer (1.3.0)
       loofah (~> 2.3)
     railties (6.0.3.2)
@@ -211,6 +217,9 @@ GEM
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 4.0)
       netrc (~> 0.8)
+    rexml (3.2.4)
+    ruby-graphviz (1.2.5)
+      rexml
     ruby2_keywords (0.0.2)
     ruby_parser (3.14.2)
       sexp_processor (~> 4.9)
@@ -299,6 +308,7 @@ DEPENDENCIES
   pg (>= 0.18, < 2.0)
   puma (~> 4.1)
   rails (~> 6.0.3, >= 6.0.3.2)
+  rails-erd
   redis
   redis-namespace
   redis-rails

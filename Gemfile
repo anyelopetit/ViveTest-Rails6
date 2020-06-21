@@ -77,3 +77,6 @@ gem 'sinatra', require: nil
 
 # Shim to load environment variables from .env into ENV in development.
 gem 'dotenv-rails', groups: %i[development test]
+
+# Generate a diagram based on your application's Active Record models.
+gem 'rails-erd', group: :development
