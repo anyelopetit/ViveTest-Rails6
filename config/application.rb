@@ -18,5 +18,7 @@ module ViveTestRails6
 
     # Active Job adapter
     config.active_job.queue_adapter = :sidekiq
+
+    config.assets.initialize_on_precompile = false
   end
 end
