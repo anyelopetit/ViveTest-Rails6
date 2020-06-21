@@ -6,7 +6,7 @@ class ProductsPayloadJob < ApplicationJob
 
   def perform(loader, products_params)
     products_params.each do |product_params|
-      ProductCreatorJob.perform_later(loader, product_params)
+      ProductCreatorJob.perform_now(loader, product_params)
     end
   end
 end
