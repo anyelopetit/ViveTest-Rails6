@@ -23,7 +23,21 @@ gem 'rest-client'
 gem 'hash_dot'
 
 # To fix a Draper deprecation error
+gem 'activemodel-serializers-xml'
 gem 'active_model_serializers'
+
+# Redis server to run tasks in background
+gem 'redis'
+gem 'redis-namespace'
+gem 'redis-rails'
+gem 'sidekiq', '~> 5.2.8'
+gem 'sinatra', require: nil
+
+# Shim to load environment variables from .env into ENV in development.
+gem 'dotenv-rails', groups: %i[development test]
+
+# Generate a diagram based on your application's Active Record models.
+gem 'rails-erd', group: :development
 ```
 
 
@@ -35,6 +49,13 @@ API, con los siguientes indicadores:
   - Cantidad de productos cargados.
   - Cantidad de productos no cargado
 - La home page lista los productos que están en base de datos permitiendo hacer clic a un enlace en donde se puede ver el detalle de las variantes.
+
+
+# Solución a problemas presentados
+- El dashboard es de acceso público. Cualquier persona puede acceder a él sin autenticarse.
+- La API es de acceso público. Cualquier persona puede crear productos a través del endpoint `POST https://anyelo-vive-test-rails-6.herokuapp.com//products` usando el payload correcto: ![Payload](https://i.ibb.co/TMvXM4F/Deepin-Screenshot-Seleccionar-rea-20200620200744.png) 
+- La App usa dos Jobs, `ProductsPayloadJob` que se encarga de procesar el payload cargado y `ProductCreatorJob` que se encarga de crear cada producto como una petición por separado, los cuales están diseñados para atender múltiples llamados a la API por segundo, donde cada llamado al API puede tener un payload con diferentes productos, desde 0 hasta 10.000 productos.
+- La solución está desplegada en Heroku (https://anyelo-vive-test-rails-6.herokuapp.com/) donde se instaló un AddOn para ejecutar Redis
 
 
 # Definiciones
@@ -54,11 +75,16 @@ API, con los siguientes indicadores:
   - Relaciones con otros modelos:
     - `belongs_to :loader`
     - `has_many :variants`
+  - Validaciones:
+    - `validates_presence_of :name, :description`
 - Variant: variante del producto.
   - Campos de base de datos:
     - `name`: String. Nombre de la variante (ej. "Talla").
     - `price`: Float. Precio de la variante (ej. 15.45).
   - Relaciones con otros modelos:
     - `belongs_to :product`
+  - Validaciones:
+    - `validates_presence_of :name, :price`
+    - `validates_numericality_of :price, greater_than: 0`
 
 ![ERD](https://i.ibb.co/D5Wn3Jv/Deepin-Screenshot-Seleccionar-rea-20200620195050.png)

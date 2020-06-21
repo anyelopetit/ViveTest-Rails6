@@ -1,8 +1,6 @@
 class Loader < ApplicationRecord
   has_many :products
 
-  # serialize :failed_products
-
   def total_products
     products.to_a + failed_products
   end
