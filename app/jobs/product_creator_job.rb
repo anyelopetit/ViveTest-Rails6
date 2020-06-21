@@ -5,9 +5,6 @@ class ProductCreatorJob < ApplicationJob
   queue_as :default
 
   def perform(loader, product_params)
-    # Product without assigned loader
-    product =
-      Product.new(product_params.as_json(only: [:name, :description]))
 
     if product.valid?
       # Just in case the product is valid will be related to this loader
@@ -18,9 +15,6 @@ class ProductCreatorJob < ApplicationJob
         variant = variant.to_hash.to_dot # https://github.com/adsteel/hash_dot
         product.variants.new(name: variant.name, price: variant.price)
       end
-    else
-      loader.failed_products.push(product)
-      loader.save!
     end
 
     unless product.save

@@ -7,8 +7,8 @@ ViveTest es una aplicación de prueba que se dedica a cargar productos por lote 
 
 
 # Versiones
-- Ruby 2.5.1
-- Rails 5.2
+- Ruby 2.6.6
+- Rails 6.0.3
 
 
 # Gemas utilizadas
