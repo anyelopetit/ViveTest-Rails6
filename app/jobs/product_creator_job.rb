@@ -5,6 +5,9 @@ class ProductCreatorJob < ApplicationJob
   queue_as :default
 
   def perform(loader, product_params)
+    # Product without assigned loader
+    product =
+      Product.new(product_params.as_json(only: [:name, :description]))
 
     if product.valid?
       # Just in case the product is valid will be related to this loader
@@ -18,7 +21,7 @@ class ProductCreatorJob < ApplicationJob
     end
 
     unless product.save
-      # If the product creation failed, then will be added to the loader's
+      # If the product can't be saved, then will be added to the loader's
       # failed_products
       loader.failed_products.push(product)
       loader.save!
