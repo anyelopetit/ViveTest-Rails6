@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-git_source(:github) { |repo| "https://github.com/#{repo}.git" }
+git_source(:github) { |repo| 'https://github.com/#{repo}.git' }
 
 ruby '2.6.6'
 
@@ -30,7 +30,16 @@ gem 'bootsnap', '>= 1.4.2', require: false
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'byebug', platforms: %i[mri mingw x64_mingw]
+  gem 'dotenv-rails', '~> 2.7'
+  gem 'factory_bot_rails'
+  gem 'ffaker'
+  gem 'pry-rails'
+  gem 'rspec-rails', '~> 3.9'
+  gem 'rubocop',             require: false
+  gem 'rubocop-performance', require: false
+  gem 'rubocop-rails',       require: false
+  gem 'rubocop-rspec',       require: false
 end
 
 group :development do
@@ -45,7 +54,11 @@ end
 group :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 2.15'
+  gem 'database_cleaner-active_record'
   gem 'selenium-webdriver'
+  gem 'shoulda-matchers'
+  gem 'simplecov', require: false
+  gem 'simplecov-lcov', require: false
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'webdrivers'
 end
@@ -74,9 +87,6 @@ gem 'redis-namespace'
 gem 'redis-rails'
 gem 'sidekiq', '~> 5.2.8'
 gem 'sinatra', require: nil
-
-# Shim to load environment variables from .env into ENV in development.
-gem 'dotenv-rails', groups: %i[development test]
 
 # Generate a diagram based on your application's Active Record models.
 gem 'rails-erd', group: :development

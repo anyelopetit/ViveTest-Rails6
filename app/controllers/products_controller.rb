@@ -16,7 +16,7 @@ class ProductsController < ApplicationController
   def create
     @loader = Loader.create
     ProductsPayloadJob.perform_later(@loader, products_params)
-    head :ok
+    head :created
   end
 
   private

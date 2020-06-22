@@ -12,7 +12,7 @@ class ProductCreatorJob < ApplicationJob
 
     if product.valid?
       # Just in case the product is valid will be related to this loader
-      product.loader_id = loader.id
+      product.loader = loader
 
       # Let's collect only valid variants to create the product
       valid_variants = []
@@ -37,7 +37,7 @@ class ProductCreatorJob < ApplicationJob
     if valid_variants.present? && product.save
       # Assigning valid variants to this valid product
       valid_variants.each do |variant|
-        variant.product_id = product.id
+        variant.product = product
       end
     else
       # If the product can't be saved, then will be added to the loader's
