@@ -3,6 +3,27 @@
 require "rails_helper"
 
 RSpec.describe ProductsController, type: :controller do
+  describe "GET #index" do
+    before do
+      get :index
+    end
+
+    it "200 - Ok" do
+      expect(response.status).to eq(200)
+    end
+  end
+
+  describe "GET #show" do
+    let(:product) { create(:product) }
+    before do
+      get :show, params: { id: product.to_param }
+    end
+
+    it "200 - Ok" do
+      expect(response.status).to eq(200)
+    end
+  end
+
   describe "POST #create" do
     let(:loader) { create(:loader) }
     let(:payload) {
