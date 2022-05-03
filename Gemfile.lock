@@ -174,7 +174,7 @@ GEM
     puma (4.3.5)
       nio4r (~> 2.0)
     rack (2.2.3)
-    rack-protection (2.0.8.1)
+    rack-protection (2.2.0)
       rack
     rack-proxy (0.6.5)
       rack
@@ -278,7 +278,7 @@ GEM
     ruby-graphviz (1.2.5)
       rexml
     ruby-progressbar (1.10.1)
-    ruby2_keywords (0.0.2)
+    ruby2_keywords (0.0.5)
     ruby_parser (3.14.2)
       sexp_processor (~> 4.9)
     rubyzip (2.3.0)
@@ -308,10 +308,10 @@ GEM
       simplecov-html (~> 0.11)
     simplecov-html (0.12.2)
     simplecov-lcov (0.8.0)
-    sinatra (2.0.8.1)
+    sinatra (2.2.0)
       mustermann (~> 1.0)
-      rack (~> 2.0)
-      rack-protection (= 2.0.8.1)
+      rack (~> 2.2)
+      rack-protection (= 2.2.0)
       tilt (~> 2.0)
     spring (2.1.0)
     spring-watcher-listen (2.0.1)
